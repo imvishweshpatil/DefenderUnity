@@ -17,7 +17,6 @@ public class mob_tests
         UserInput.Instance = Substitute.For<IUserInput>();
         yield return TestHelpers.LoadScene("MobTests");
         _gameManager = TestHelpers.GetGameManager();
-        _gameManager.StartGame();
         yield return new WaitForEndOfFrame();
         _human = TestHelpers.GetHuman();
     }

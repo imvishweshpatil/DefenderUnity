@@ -14,7 +14,7 @@ public class TitleScreen : MonoBehaviour
 
     void Awake()
     {
-        _userInput = FindObjectOfType<UserInput>();
+        _userInput = UserInput.Instance;
     }
     private void OnEnable()
     {

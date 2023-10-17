@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 117877355374641325}
@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.44
+      scalar: 1.01
+      minScalar: 0.37
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4797,7 +4797,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4854,8 +4854,8 @@ Transform:
   m_GameObject: {fileID: 7299614571693704939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.32, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.361, y: 0.009, z: 0}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1652246328687771864}
@@ -5033,7 +5033,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 491586621, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5108,7 +5108,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.65000004, y: 0.34066406}
+    oldSize: {x: 0.8666667, y: 0.45421875}
     newSize: {x: 0.65000004, y: 0.34066406}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5136,6 +5136,6 @@ MonoBehaviour:
   _fireSound: {fileID: 0}
   _explosionSound: {fileID: 8300000, guid: 292ad3a2d4b5f4044a3e61b2fd1d11ce, type: 3}
   _renderer: {fileID: 5253475366876207628}
-  _speed: 5
+  _speed: 20
   _verticalSpeed: 500
   _legalAltitude: {x: -4.65, y: 3}
