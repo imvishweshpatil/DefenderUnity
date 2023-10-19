@@ -14,8 +14,8 @@ TagManager:
   - EnemyMobs
   - PlayerProjectiles
   - Humans
-  - 
-  - 
+  - HUD
+  - OverviewMap
   - 
   - 
   - 
