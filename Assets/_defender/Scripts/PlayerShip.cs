@@ -86,7 +86,6 @@ public class PlayerShip : MonoBehaviour
 
     private void HandleOnFire()
     {
-        Debug.Log("Fire Pressed!");
         _gun.FireGun();
     }
     

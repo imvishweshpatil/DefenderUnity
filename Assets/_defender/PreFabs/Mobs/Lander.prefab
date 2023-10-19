@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5682598921761449778}
   - component: {fileID: 1329883320490471671}
   - component: {fileID: 6149255169558140176}
-  - component: {fileID: 7452968596269968341}
+  - component: {fileID: 4337529353055532786}
   m_Layer: 6
   m_Name: Lander
   m_TagString: Untagged
@@ -162,7 +162,7 @@ MonoBehaviour:
   - {fileID: 879696338, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
   - {fileID: -1862106553, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
   _frameDelay: 0.1
---- !u!61 &7452968596269968341
+--- !u!61 &4337529353055532786
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,7 +194,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0048317313, y: -0.010468751}
+  m_Offset: {x: -0.003709793, y: 0.03214951}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -205,5 +205,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.40261263, y: 0.49231386}
+  m_Size: {x: 0.37796402, y: 0.4161786}
   m_EdgeRadius: 0
