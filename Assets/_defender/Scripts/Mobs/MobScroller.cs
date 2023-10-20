@@ -1,5 +1,6 @@
 using System;
 using System.Net.Sockets;
+using Codice.CM.WorkspaceServer.DataStore.WkTree;
 using UnityEngine;
 
 
@@ -29,7 +30,20 @@ public class MobScroller : MonoBehaviour
 
     private void ScrollMob()
     {
-        _transform.position += Vector3.right * ScrollAmount * Time.deltaTime;
+       var position =  _transform.position + (Vector3.right * (ScrollAmount * Time.deltaTime));
+       var leftEdge = _gameManager.MapWidth * -0.5f;
+       var rightEdge = _gameManager.MapWidth * 0.5f;
+
+       if (position.x < leftEdge)
+       {
+           position.x = rightEdge;
+       }
+       else if (position.x > rightEdge)
+       {
+           position.x = leftEdge;
+       }
+
+       _transform.position = position;
     }
 }
 
