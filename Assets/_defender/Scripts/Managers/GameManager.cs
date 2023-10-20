@@ -7,9 +7,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject _playerShipPrefab;
     [SerializeField] private AudioClip _startSound;
-    [SerializeField] private int _mapWidth = 50;
-
-    public int MapWidth => _mapWidth;
 
     private void OnEnable()
     {
