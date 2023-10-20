@@ -14,7 +14,8 @@ public class PlayerShip : MonoBehaviour
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private float _speed = 5f, _verticalSpeed = 500f;
     [SerializeField] private Vector2 _legalAltitude = new Vector2(-4.65f, 3f);
-
+    [SerializeField] private Gun _gun;
+    
     private IUserInput _userInput;
     private Transform _transform;
     private Rigidbody2D _rigidbody;
@@ -85,7 +86,7 @@ public class PlayerShip : MonoBehaviour
 
     private void HandleOnFire()
     {
-        Debug.Log("Fire Pressed!");
+        _gun.FireGun();
     }
     
     private void UpdateEngineThruster()

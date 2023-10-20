@@ -32,7 +32,6 @@ public class UserInput : MonoBehaviour, IUserInput
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     
     void OnMove(InputValue value)

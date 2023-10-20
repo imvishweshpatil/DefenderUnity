@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BootStraper : MonoBehaviour
 {
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Initialize()
     {
         var bootstrapPrefab = Resources.Load("--- Persistent Components ---");
