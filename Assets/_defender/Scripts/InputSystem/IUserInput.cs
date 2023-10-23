@@ -10,6 +10,8 @@ public interface IUserInput
     event Action OnFirePressed;
     event Action OnStartPressed;
     event Action OnSubmitPressed;
+    event Action OnSmartBombPressed;
+    event Action onHyperspacePressed;
     Vector2 MoveInput { get; }
     bool UpPressed { get; }
     bool DownPressed { get; }

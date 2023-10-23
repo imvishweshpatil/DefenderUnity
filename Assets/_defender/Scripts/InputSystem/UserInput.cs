@@ -12,7 +12,9 @@ public class UserInput : MonoBehaviour, IUserInput
     public event Action OnFirePressed;
     public event Action OnStartPressed;
     public event Action OnSubmitPressed;
-    
+    public event Action OnSmartBombPressed;
+    public event Action onHyperspacePressed;
+
     public bool IsThrusting => _thrustInput.y > 0;
     public Vector2 MoveInput => _moveInput;
     public Vector2 ThrustInput => _thrustInput;
@@ -36,7 +38,6 @@ public class UserInput : MonoBehaviour, IUserInput
     
     void OnMove(InputValue value)
     {
-        Debug.Log($"OnMove({value})");
         _moveInput = value.Get<Vector2>();
         OnMoveReceived?.Invoke(value);
     }
@@ -49,10 +50,9 @@ public class UserInput : MonoBehaviour, IUserInput
     }
 
     void OnFlip() => OnFlipPressed?.Invoke();
-
     void OnFire() => OnFirePressed?.Invoke();
-
     void OnStart() => OnStartPressed?.Invoke();
-
     void OnSubmit() => OnSubmitPressed?.Invoke();
+    void OnSmartBomb() => OnSmartBombPressed?.Invoke();
+    void OnHyperspace() => onHyperspacePressed?.Invoke();
 }

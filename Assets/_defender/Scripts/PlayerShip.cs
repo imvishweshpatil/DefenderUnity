@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Random = UnityEngine.Random;
 
 public class PlayerShip : MonoBehaviour
 {
@@ -23,13 +23,15 @@ public class PlayerShip : MonoBehaviour
     private int _direction;
     private Vector2 _moveInput, _thrustInput;
     private int _sprite;
-    
+    private Camera _mainCamera;
+    private float _hyperspaceDelay;
 
     private void Awake()
     {
         _transform = transform;
         _rigidbody = GetComponent<Rigidbody2D>();
         _userInput = UserInput.Instance;
+        _mainCamera = Camera.main;
     }
 
     private void OnEnable()
@@ -38,16 +40,18 @@ public class PlayerShip : MonoBehaviour
         _userInput.OnThrustReceived += HandleOnThrust;
         _userInput.OnFlipPressed += HandleOnFlipDirection;
         _userInput.OnFirePressed += HandleOnFire;
+        _userInput.onHyperspacePressed += HandleOnHyperspace;
         _direction = 1;
         UpdateEngineThruster();
     }
-
+    
     private void OnDisable()
     {
         _userInput.OnMoveReceived -= HandleOnMove;
         _userInput.OnThrustReceived -= HandleOnThrust;
         _userInput.OnFlipPressed -= HandleOnFlipDirection;
         _userInput.OnFirePressed -= HandleOnFire;
+        _userInput.onHyperspacePressed -= HandleOnHyperspace;
     }
 
     private void FixedUpdate()
@@ -87,6 +91,19 @@ public class PlayerShip : MonoBehaviour
     private void HandleOnFire()
     {
         _gun.FireGun();
+    }
+    
+    private void HandleOnHyperspace()
+    {
+        if (Time.time < _hyperspaceDelay) return;
+        _hyperspaceDelay = Time.time + 0.25f;
+        var legalEntryAltitude = _mainCamera.WorldToViewportPoint(_legalAltitude);
+        var reentryPosition = Vector3.zero;
+        reentryPosition.x = Random.Range(0.1f, 0.9f);
+        reentryPosition.y = Mathf.Clamp(Random.Range(0.1f, 0.9f), legalEntryAltitude.x, legalEntryAltitude.y);
+        reentryPosition = _mainCamera.ViewportToWorldPoint(reentryPosition);
+        reentryPosition.z = 0;
+        _transform.position = reentryPosition;
     }
     
     private void UpdateEngineThruster()
