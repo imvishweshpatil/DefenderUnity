@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
     public void FireGun()
     {
         if (!CanFire) return;
-        SoundManager.Instance.PlayAudioClip(_fireSound, _fireSoundVolume);
+        SoundManager.Instance.PlayAudioClip(SoundManager.Instance.FireSound, _fireSoundVolume);
         var projectile = Instantiate(_projectilePrefab, _transform.position, _transform.rotation);
         projectile.gameObject.SetActive(true);
         _coolDownTime = Time.time + _fireDelay;

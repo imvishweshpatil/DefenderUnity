@@ -8,13 +8,12 @@ public class GameManager : MonoBehaviour
     public int Score { get; private set; }
     public int Lives { get; private set; }
     public int SmartBombs { get; private set; }
-    
     public event Action<int> ScoreChanged;
     public event Action<int> playerLivesChanged;
     public event Action<int> SmartBombsChanged;
+    public event Action<GameObject> EntityDestroyed;
     
     [SerializeField] private GameObject _playerShipPrefab;
-    [SerializeField] private AudioClip _startSound;
     [SerializeField] private static int _mapWidth = 50;
    
     private IUserInput _userInput;
@@ -33,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        SoundManager.Instance.PlayAudioClip(_startSound);
+        SoundManager.Instance.PlayAudioClip(SoundManager.Instance.StartSount);
         Score = 0;
         Lives = 3;
         SmartBombs = 3;
@@ -62,8 +61,8 @@ public class GameManager : MonoBehaviour
                 Invoke(nameof(SpawnPlayerShip), 3f);
             }
         }
-        
         Destroy(component);
+        EntityDestroyed?.Invoke(component);
     }
 
     private void HandleSmartBombPressed()

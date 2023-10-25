@@ -1,10 +1,7 @@
-using System;
 using UnityEngine;
-
 
 public class Destructable : MonoBehaviour
 {
-    [SerializeField] private GameObject _explosionPrefab;
     [SerializeField] private int _points = 150;
     
     private GameManager _gameManager;
@@ -17,7 +14,7 @@ public class Destructable : MonoBehaviour
     [ContextMenu("Destroy Me")]
     public void DestroyMe()
     {
-        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        Instantiate(EffectsManager.Instance.ExplosionPrefab, transform.position, Quaternion.identity);
         _gameManager.Addpoints(_points);
         _gameManager.ComponentDestroyed(gameObject);
     }

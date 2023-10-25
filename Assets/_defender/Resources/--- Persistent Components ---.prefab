@@ -147,6 +147,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8784008164079040682, guid: 04b492d4ab35cf6459679d8c98ea9a15, type: 3}
+      propertyPath: _fireSound
+      value: 
+      objectReference: {fileID: 8300000, guid: de812cfb519929c4aad9d296f655c81d, type: 3}
+    - target: {fileID: 8784008164079040682, guid: 04b492d4ab35cf6459679d8c98ea9a15, type: 3}
+      propertyPath: _startSound
+      value: 
+      objectReference: {fileID: 8300000, guid: ecefd246388ea4a4e97c3cea56018e4c, type: 3}
+    - target: {fileID: 8784008164079040682, guid: 04b492d4ab35cf6459679d8c98ea9a15, type: 3}
+      propertyPath: _beamInSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c61f2a2b08239c441b67579b873a297d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

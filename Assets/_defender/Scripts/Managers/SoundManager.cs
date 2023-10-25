@@ -3,7 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
-    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _fireSound, _startSound, _beamInSound;
+
+    private AudioSource _audioSource; 
+    public AudioClip FireSound => _fireSound;
+    public AudioClip StartSount => _startSound;
+    public AudioClip BeamInSound => _beamInSound;
     public static SoundManager Instance { get; private set; }
 
     void Awake()
