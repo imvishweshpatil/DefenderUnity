@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Codice.Client.BaseCommands;
 using UnityEngine;
 
 public class MobManager : MonoBehaviour
@@ -31,5 +32,18 @@ public class MobManager : MonoBehaviour
         if (!_humans.Contains(entity)) return;
         _humans.Remove(entity);
         Debug.Log($"{name} removing {entity.name}. {_humans.Count} humans remain.");
+        if (_humans.Count < 1)
+        {
+            MutateMobs();
+        }
+    }
+
+    private void MutateMobs()
+    {
+        Debug.Log($"Mutating mobs in {_waves.Length} waves");
+        foreach (var wave in _waves)
+        {
+            wave.MutateMobs();
+        }
     }
 }

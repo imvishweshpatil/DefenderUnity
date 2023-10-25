@@ -5155,6 +5155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9d7dd645ab31f47b2f1edba555389c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layersToIgnore:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &7922298984958398123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5167,7 +5170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf18d0d8c44a8c4da41d17697fa812b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionPrefab: {fileID: 869899766004654987, guid: 2faa1e1144afb84459dbf89a6e2958e6, type: 3}
   _points: 0
 --- !u!1001 &5220375030935940635
 PrefabInstance:

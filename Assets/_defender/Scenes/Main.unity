@@ -586,7 +586,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f656b86f26ddb446a1182acf6f25ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waves: []
+  _waves:
+  - {fileID: 2109316846}
+  - {fileID: 36025812}
   _humansContainer: {fileID: 1983838234}
 --- !u!4 &69259384 stripped
 Transform:

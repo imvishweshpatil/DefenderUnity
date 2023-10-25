@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,10 +19,16 @@ public class GameManager : MonoBehaviour
    
     private IUserInput _userInput;
     private float _smartBombDelay;
+    private MobManager _mobManager;
 
     private void OnEnable()
     {
         StartGame();
+    }
+
+    private void Awake()
+    {
+        _mobManager = FindObjectOfType<MobManager>();
     }
 
     private void Start()
@@ -63,6 +70,27 @@ public class GameManager : MonoBehaviour
         }
         Destroy(component);
         EntityDestroyed?.Invoke(component);
+
+        if (Lives < 1)
+        {
+            GameOver();
+            return;
+        }
+
+        if (_mobManager.RemainingEnemies < 1)
+        {
+            WaveComplete();
+        }
+    }
+
+    private void WaveComplete()
+    {
+        Debug.Log("Wave Complete!");
+    }
+
+    void GameOver()
+    {
+        Debug.Log("Game Over!");
     }
 
     private void HandleSmartBombPressed()
