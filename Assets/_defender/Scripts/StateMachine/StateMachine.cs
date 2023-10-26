@@ -1,21 +1,24 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Unity.Plastic.Antlr3.Runtime.Misc;
 using UnityEditor.Animations;
 
 public class StateMachine
 {
+    public event Action<IState> OnStateChanged;
+    
     private readonly List<StateTransition> _stateTransition = new List<StateTransition>();
     private readonly List<StateTransition> _anystateTransition = new List<StateTransition>();
     public IState CurrentState { get; private set; }
+
 
     public void SetState(IState state)
     {
         CurrentState = state;
     }
 
-    public void AddTransition(IState from, IState to, Func<bool> condition)
+    public void AddTransition(IState from, IState to, Unity.Plastic.Antlr3.Runtime.Misc.Func<bool> condition)
     {
         var transition = new StateTransition(from, to, condition);
         _stateTransition.Add(transition);
@@ -32,7 +35,7 @@ public class StateMachine
         CurrentState.Tick();
     }
 
-    public void AddAnyTransition(IState to, Func<bool> condition)
+    public void AddAnyTransition(IState to, Unity.Plastic.Antlr3.Runtime.Misc.Func<bool> condition)
     {
         var transition = new StateTransition(null, to, condition);
         _anystateTransition.Add(transition);

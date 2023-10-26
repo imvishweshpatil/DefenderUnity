@@ -1,0 +1,79 @@
+using System;
+using _defender.Scripts.Attributes;
+using UnityEngine;
+
+
+public class LanderStateMachine : MonoBehaviour
+{
+    public event Action<IState> LanderStateChanged = delegate(IState state) {  }; 
+    public Type CurrentStateType => _stateMachine.CurrentState.GetType();
+    
+    [SerializeField] Vector3 _patrolMin = Constants.PatrolMin;
+    [SerializeField] Vector3 _patrolMax = Constants.PatrolMax;
+    [SerializeField] float _patrolDistance = 3f, _speed = 0.5f;
+    [SerializeField] float _mutateHeight = 3f;
+    [SerializeField] float _fireDelayMin = 2f, _fireDelayMax = 5f;
+    [SerializeField] GameObject _projectilePrefab;
+    
+    private Transform _transform;
+    Transform _nearestHuman;
+    private StateMachine _stateMachine;
+    RaycastHit2D[] _hits;
+    private void Awake()
+    {
+        _transform = transform;
+        _stateMachine = new StateMachine();
+        _stateMachine.OnStateChanged += state => LanderStateChanged.Invoke(state);
+        var patrol = new LanderPatrol(
+            _transform,
+            _patrolMin,
+            _patrolMax,
+            _patrolDistance,
+            _speed,
+            _fireDelayMin,
+            _fireDelayMax,
+            _projectilePrefab);
+        
+        _hits = new RaycastHit2D[3];
+        var intercept = new LanderInterceptHuman(
+            _transform, GetNearestHuman, _speed);
+        
+        _stateMachine.AddTransition(
+            patrol,
+            intercept,
+            () => GetNearestHuman() != null);
+        
+        _stateMachine.SetState(patrol);
+    }
+
+    /*private void Update()
+    {
+        _stateMachine.Tick();
+    }*/
+
+    Transform GetNearestHuman()
+    {
+        if (_nearestHuman != null) return _nearestHuman;
+        var hits = Physics2D.CircleCastNonAlloc(_transform.position, 2f, Vector2. down, _hits, 1f);
+        for (var i = 0; i < hits && !_nearestHuman; ++i)
+        {
+            if(!IsHuman(1, out var human)) continue;
+            if (AlreadyCaptured(human)) continue;
+            _nearestHuman = human.transform;
+        }
+        return _nearestHuman;
+    }
+
+    bool IsHuman(int i, out Human human)
+    {
+        return _hits[i].transform.TryGetComponent<Human>(out human);
+    }
+
+    private bool AlreadyCaptured(Human human)
+    {
+        var parent = human.transform.parent;
+        if (!parent) return false;
+        return (parent.TryGetComponent<MutatableMob>(out var mob) ||
+            parent.TryGetComponent<PlayerShip>(out var player));
+    }
+}

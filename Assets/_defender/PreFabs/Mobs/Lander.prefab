@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 620515026197252689}
   - component: {fileID: 6399931068304950922}
   - component: {fileID: 6758728943430694623}
+  - component: {fileID: 2288040315870813836}
   m_Layer: 6
   m_Name: Lander
   m_TagString: Untagged
@@ -357,3 +358,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mutantMobPrefab: {fileID: 7240105966223285811, guid: ca4b819299dc24e4aad3e9ab095e0d06, type: 3}
+--- !u!114 &2288040315870813836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7240105966223285811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a53b46d3fa97c84f8792aed9c0a89c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _patrolMin: {x: -24, y: -4, z: 1}
+  _patrolMax: {x: 24, y: 3, z: 1}
+  _patrolDistance: 3
+  _speed: 0.5
+  _mutateHeight: 3
+  _fireDelayMin: 2
+  _fireDelayMax: 5
+  _projectilePrefab: {fileID: 0}
