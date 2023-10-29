@@ -1,25 +1,24 @@
-using System;
-using TMPro;
 using UnityEngine;
+
 
 public class PlayerLivesUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _playerLifePrefab;
-    private Transform _transform;
-    private GameManager _gameManager;
+    [SerializeField] GameObject _playerLifePrefab;
+    Transform _transform;
+    GameManager _gameManager;
 
-    private void Awake()
+    void Awake()
     {
         _transform = transform;
         _gameManager = FindObjectOfType<GameManager>();
     }
 
-    private void Start()
+    void Start()
     {
-        _gameManager.playerLivesChanged += OnPlayerLiveschanged;
+        _gameManager.PlayerLivesChanged += OnPlayerLivesChanged;
     }
 
-    private void OnPlayerLiveschanged(int lives)
+    void OnPlayerLivesChanged(int lives)
     {
         while (_transform.childCount > lives)
         {
@@ -29,7 +28,7 @@ public class PlayerLivesUI : MonoBehaviour
         }
 
         while (_transform.childCount < lives)
-        { 
+        {
             Instantiate(_playerLifePrefab, _transform);
         }
     }

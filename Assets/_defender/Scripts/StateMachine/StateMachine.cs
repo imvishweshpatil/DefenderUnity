@@ -31,7 +31,6 @@ public class StateMachine
         {
             SetState(transition.To);
         }
-
         CurrentState.Tick();
     }
 

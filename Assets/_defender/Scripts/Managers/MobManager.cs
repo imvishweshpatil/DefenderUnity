@@ -1,21 +1,20 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Codice.Client.BaseCommands;
 using UnityEngine;
 
 public class MobManager : MonoBehaviour
 {
     public int RemainingHumans => _humans.Count;
     public int RemainingEnemies => _waves.Sum(w => w.RemainingEnemies);
+    public Transform HumansContainer => _humansContainer;
     
-    [SerializeField] private WaveManager[] _waves;
-    [SerializeField] private Transform _humansContainer;
+    [SerializeField] WaveManager[] _waves;
+    [SerializeField] Transform _humansContainer;
 
-    private GameManager _gameManager;
-    private List<GameObject> _humans;
+    GameManager _gameManager;
+    List<GameObject> _humans;
 
-    private void Start()
+    void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
         _gameManager.EntityDestroyed += OnEntityDestroyed;
@@ -27,7 +26,7 @@ public class MobManager : MonoBehaviour
         Debug.Log($"Mob manager found {_humans.Count} humans.");
     }
 
-    private void OnEntityDestroyed(GameObject entity)
+    void OnEntityDestroyed(GameObject entity)
     {
         if (!_humans.Contains(entity)) return;
         _humans.Remove(entity);
@@ -38,7 +37,7 @@ public class MobManager : MonoBehaviour
         }
     }
 
-    private void MutateMobs()
+    void MutateMobs()
     {
         Debug.Log($"Mutating mobs in {_waves.Length} waves");
         foreach (var wave in _waves)

@@ -316,7 +316,11 @@ MonoBehaviour:
   _renderer: {fileID: 511914642686124284}
   _sprites:
   - {fileID: 879696338, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
+  - {fileID: -1396425846, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
   - {fileID: -1862106553, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
+  - {fileID: -808208756, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
+  - {fileID: -1087439529, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
+  - {fileID: -445933810, guid: 3f10a9204668b2c448d2bc29e622b5e4, type: 3}
   _frameDelay: 0.1
 --- !u!114 &620515026197252689
 MonoBehaviour:
@@ -373,8 +377,8 @@ MonoBehaviour:
   _patrolMin: {x: -24, y: -4, z: 1}
   _patrolMax: {x: 24, y: 3, z: 1}
   _patrolDistance: 3
-  _speed: 0.5
+  _speed: 1
   _mutateHeight: 3
   _fireDelayMin: 2
   _fireDelayMax: 5
-  _projectilePrefab: {fileID: 0}
+  _projectilePrefab: {fileID: 3766392865542469881, guid: 6a755b47d66005e48a1cc4ab9993108d, type: 3}

@@ -19,9 +19,12 @@ public class LanderStateMachine : MonoBehaviour
     Transform _nearestHuman;
     private StateMachine _stateMachine;
     RaycastHit2D[] _hits;
+    private MutatableMob _mutableMob;
+
     private void Awake()
     {
         _transform = transform;
+        _mutableMob = gameObject.GetComponent<MutatableMob>();
         _stateMachine = new StateMachine();
         _stateMachine.OnStateChanged += state => LanderStateChanged.Invoke(state);
         var patrol = new LanderPatrol(
@@ -38,11 +41,36 @@ public class LanderStateMachine : MonoBehaviour
         var intercept = new LanderInterceptHuman(
             _transform, GetNearestHuman, _speed);
         
+        var abduct = new LanderAbductHuman(_transform, _mutateHeight, _speed);
+        
+        var mutate = new LanderMutate(_transform);
+
         _stateMachine.AddTransition(
             patrol,
             intercept,
             () => GetNearestHuman() != null);
         
+        _stateMachine.AddTransition(
+            intercept,
+            patrol,
+            () => intercept.HumanTargetLost);
+
+        
+        _stateMachine.AddTransition(
+            intercept,
+            abduct,
+            () => _mutableMob.HumanPassenger() != null);
+        
+        _stateMachine.AddTransition(
+            abduct,
+            mutate,
+            () => _transform.position.y >= _mutateHeight);
+
+        _stateMachine.AddTransition(
+            abduct,
+            patrol,
+            () => _mutableMob.HumanPassenger() == null);
+
         _stateMachine.SetState(patrol);
     }
 

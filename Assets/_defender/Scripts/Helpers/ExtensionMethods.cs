@@ -15,4 +15,10 @@ public static class ExtensionMethods
         position += direction * (speed * Time.deltaTime);
         transform.position = position;
     }
+
+    public static void DropHumanPassenger(this GameObject component, Transform humanContainer)
+    {
+        if (!component.TryGetComponent<MutatableMob>(out var mutatableMob)) return;
+        mutatableMob.DropHumanPassenger(humanContainer);
+    }
 }

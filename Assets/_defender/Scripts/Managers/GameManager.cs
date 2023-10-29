@@ -1,37 +1,40 @@
 using System;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class GameManager : MonoBehaviour
 {
     public PlayerShip PlayerShip { get; private set; }
-    public int MapWidth = _mapWidth;
+    public bool PlayerAlive { get; private set; }
+    public int MapWidth => _mapWidth;
     public int Score { get; private set; }
     public int Lives { get; private set; }
     public int SmartBombs { get; private set; }
+
+    public event Action PlayerShipSpawned = delegate {  };
     public event Action<int> ScoreChanged;
-    public event Action<int> playerLivesChanged;
+    public event Action<int> PlayerLivesChanged;
     public event Action<int> SmartBombsChanged;
     public event Action<GameObject> EntityDestroyed;
     
-    [SerializeField] private GameObject _playerShipPrefab;
-    [SerializeField] private static int _mapWidth = 50;
-   
-    private IUserInput _userInput;
-    private float _smartBombDelay;
-    private MobManager _mobManager;
+    [SerializeField] GameObject _playerShipPrefab;
+    [SerializeField] int _mapWidth = 50;
 
-    private void OnEnable()
+    IUserInput _userInput;
+    float _smartBombDelay;
+    MobManager _mobManager;
+
+
+    void OnEnable()
     {
         StartGame();
     }
 
-    private void Awake()
+    void Awake()
     {
         _mobManager = FindObjectOfType<MobManager>();
     }
 
-    private void Start()
+    void Start()
     {
         _userInput = UserInput.Instance;
         _userInput.OnSmartBombPressed += HandleSmartBombPressed;
@@ -39,20 +42,22 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        SoundManager.Instance.PlayAudioClip(SoundManager.Instance.StartSount);
+        SoundManager.Instance.PlayAudioClip(SoundManager.Instance.StartSound);
         Score = 0;
         Lives = 3;
         SmartBombs = 3;
         SpawnPlayerShip();
     }
 
-    private void SpawnPlayerShip()
+    void SpawnPlayerShip()
     {
         PlayerShip = Instantiate(_playerShipPrefab).GetComponent<PlayerShip>();
         PlayerShip.name = "Player Ship";
+        PlayerAlive = true;
+        PlayerShipSpawned();
     }
 
-    public void Addpoints(int points)
+    public void AddPoints(int points)
     {
         Score += points;
         ScoreChanged?.Invoke(Score);
@@ -62,12 +67,15 @@ public class GameManager : MonoBehaviour
     {
         if (component.TryGetComponent<PlayerShip>(out var player))
         {
-            playerLivesChanged?.Invoke(--Lives);
+            PlayerAlive = false;
+            PlayerLivesChanged?.Invoke(--Lives);
             if (Lives > 0)
             {
                 Invoke(nameof(SpawnPlayerShip), 3f);
             }
         }
+
+        component.DropHumanPassenger(_mobManager.HumansContainer);
         Destroy(component);
         EntityDestroyed?.Invoke(component);
 
@@ -83,9 +91,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void WaveComplete()
+    void WaveComplete()
     {
-        Debug.Log("Wave Complete!");
+        Debug.Log("Wave complete!");
     }
 
     void GameOver()
@@ -93,11 +101,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
-    private void HandleSmartBombPressed()
+    void HandleSmartBombPressed()
     {
         if (SmartBombs < 1 || Time.time < _smartBombDelay) return;
         _smartBombDelay = Time.time + 0.25f;
         SmartBombsChanged?.Invoke(--SmartBombs);
     }
 }
-

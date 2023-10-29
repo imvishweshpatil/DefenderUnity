@@ -3,11 +3,24 @@ using UnityEngine;
 
 public class LanderInterceptHuman : IState
 {
+    public bool HumanTargetLost
+    {
+        get
+        {
+            if (!_nearestHuman) return true;
+            var parent = _nearestHuman.parent;
+            if (!parent) return false;
+            if (!parent.TryGetComponent<MutatableMob>(out var mutatableMob)) return false;
+            return mutatableMob.transform != _transform;
+
+        }
+    }
     private readonly Transform _transform;
     private readonly Func<Transform> _getNearestHuman;
     private readonly float _interceptSpeed;
 
     Transform _nearestHuman;
+
 
     public LanderInterceptHuman(
         Transform transform,

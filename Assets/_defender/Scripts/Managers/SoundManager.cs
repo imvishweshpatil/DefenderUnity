@@ -1,15 +1,17 @@
 using UnityEngine;
- 
+
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip _fireSound, _startSound, _beamInSound;
-
-    private AudioSource _audioSource; 
-    public AudioClip FireSound => _fireSound;
-    public AudioClip StartSount => _startSound;
-    public AudioClip BeamInSound => _beamInSound;
+    AudioSource _audioSource;
+    
     public static SoundManager Instance { get; private set; }
+
+    [SerializeField] AudioClip _fireSound, _startSound, _beamInSound;
+
+    public AudioClip FireSound => _fireSound;
+    public AudioClip StartSound => _startSound;
+    public AudioClip BeamInSound => _beamInSound;
 
     void Awake()
     {
@@ -22,6 +24,7 @@ public class SoundManager : MonoBehaviour
         Instance = this;
         _audioSource = GetComponent<AudioSource>();
     }
+    
 
     public void PlayAudioClip(AudioClip clip, float volume = 1f)
     {

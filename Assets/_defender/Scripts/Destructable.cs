@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Destructable : MonoBehaviour
 {
-    [SerializeField] private int _points = 150;
-    
-    private GameManager _gameManager;
+    [SerializeField] int _points = 150;
 
-    private void Start()
+    GameManager _gameManager;
+
+    void Start()
     {
         _gameManager = FindObjectOfType<GameManager>();
     }
@@ -15,7 +15,7 @@ public class Destructable : MonoBehaviour
     public void DestroyMe()
     {
         Instantiate(EffectsManager.Instance.ExplosionPrefab, transform.position, Quaternion.identity);
-        _gameManager.Addpoints(_points);
+        _gameManager.AddPoints(_points);
         _gameManager.ComponentDestroyed(gameObject);
     }
 }
